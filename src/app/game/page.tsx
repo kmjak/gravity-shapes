@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import defaultField from "@/lib/fields";
+import defaultField from "@/lib/conf/fields.conf";
 
 export const metadata: Metadata = {
   title: 'game',
