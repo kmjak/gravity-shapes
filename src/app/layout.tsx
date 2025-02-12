@@ -13,7 +13,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Gravity Shapes",
+  title: {
+    template: '%s | Gravity Shapes',
+    default: 'Gravity Shapes',
+  },
   description: "“Gravity Shapes” is a falling block game where you choose 5 unique shapes before playing. Strategically stack your selected blocks as they fall randomly and aim for the highest score!",
 };
 
