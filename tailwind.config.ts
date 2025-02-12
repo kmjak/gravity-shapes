@@ -9,7 +9,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        wall: "#f5f5f5",
+        background: "#f5f5f5",
+        wall: "#3f3f3f",
         border: "border-[1px]",
         gray: "#333333",
         block1: "#ff0000",
