@@ -32,8 +32,8 @@ export default function SelectShapeModal({
                     key={x}
                     className={`w-6 h-6 border border-black ${
                       shape.blocks.some((block:Block) => block.x === x && block.y === y)
-                        ? "bg-white"
-                        : "bg-wall"
+                        ? "bg-wall"
+                        : "bg-cell"
                     }`}
                   />
                 ))}
