@@ -1,25 +1,25 @@
 import { Metadata } from "next";
-import defaultField from "@/lib/conf/fields.conf";
+import FieldModal from "@/components/FieldModal";
+import Shape from "@/types/shape/shape";
+import createShape from "@/utils/createShape";
 
 export const metadata: Metadata = {
   title: 'game',
 };
 
-export default function GamePage() {
+export default async function GamePage() {
+  const shapes: Shape[][] = [];
+  for (let i: number = 0; i < 5; i++) {
+    shapes[i] = [];
+    for (let j: number = 0; j < 2; j++) {
+      const shape: Shape = await createShape({ id: i });
+      shapes[i].push(shape);
+    }
+  }
+
   return (
-    <main className="flex flex-col items-center justify-center h-full bg-black">
-      {defaultField.map((row, y) => (
-        <div key={y} className="flex">
-          {row.map((cell, x) => (
-            <div
-              key={x}
-              className={`w-6 h-6 border border-black ${
-                cell === -1 ? "bg-wall" : "bg-white"
-              }`}
-            />
-          ))}
-        </div>
-      ))}
+    <main className="flex flex-col items-center justify-center h-full">
+      <FieldModal shapes={shapes} />
     </main>
   );
 }
