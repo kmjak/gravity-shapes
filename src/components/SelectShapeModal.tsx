@@ -25,9 +25,9 @@ export default function SelectShapeModal({
             className="flex flex-col border border-white cursor-pointer hover:border-green-600 transition-colors duration-300"
             onClick={() => handleSelectShape(idx)}
           >
-            {Array.from({ length: 15 }, (_:number,y:number) => y - 7).map((y:number) => (
+            {Array.from({ length: 7 }, (_:number,y:number) => y - 3).map((y:number) => (
               <div key={y} className="flex">
-                {Array.from({length: 15}, (_:number,x:number) => x - 7).map((x) => (
+                {Array.from({length: 7}, (_:number,x:number) => x - 3).map((x) => (
                   <div
                     key={x}
                     className={`w-6 h-6 border border-black ${
