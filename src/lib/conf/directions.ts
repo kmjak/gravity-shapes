@@ -1,4 +1,4 @@
-import Direction from "@/types/direction/direction";
+import Direction from "@/types/direction/Direction";
 
 const directions:Direction[] = [
   {x:0,y:-1},

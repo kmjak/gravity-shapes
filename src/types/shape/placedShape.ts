@@ -1,4 +1,4 @@
-import Shape from "./shape";
+import Shape from "./Shape";
 
 interface PlacedShape {
   shape:Shape;

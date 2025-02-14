@@ -1,6 +1,6 @@
 "use client"
 
-import Shape from "@/types/shape/shape"
+import Shape from "@/types/shape/Shape"
 import generateRandomNumber from "@/utils/generateRandomNumber"
 
 export default async function fetchShapeUseCase({shapes}:{shapes:Shape[][]}):Promise<Shape> {

@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import FieldModal from "@/components/FieldModal";
-import Shape from "@/types/shape/shape";
+import Shape from "@/types/shape/Shape";
 import createShape from "@/utils/createShape";
 
 export const metadata: Metadata = {

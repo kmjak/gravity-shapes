@@ -1,4 +1,4 @@
-import Block from "@/types/block/block";
+import Block from "@/types/block/Block";
 
 interface Shape {
   id: number;

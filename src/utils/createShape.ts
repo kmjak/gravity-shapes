@@ -1,9 +1,9 @@
 import { shapeSize } from "@/lib/conf/shape.conf";
 import generateRandomNumber from "./generateRandomNumber";
-import Shape from "@/types/shape/shape";
-import Block from "@/types/block/block";
+import Shape from "@/types/shape/Shape";
+import Block from "@/types/block/Block";
 import shuffleArray from "./shuffleArray";
-import Direction from "@/types/direction/direction";
+import Direction from "@/types/direction/Direction";
 import directions from "@/lib/conf/directions";
 import { sizeThresholds } from "@/lib/conf/sizeThresholds";
 

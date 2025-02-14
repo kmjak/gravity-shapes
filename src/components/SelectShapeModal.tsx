@@ -1,5 +1,5 @@
-import Block from "@/types/block/block";
-import Shape from "@/types/shape/shape";
+import Block from "@/types/block/Block";
+import Shape from "@/types/shape/Shape";
 
 interface SelectShapeModalProps {
   targetShapeIdx:number,

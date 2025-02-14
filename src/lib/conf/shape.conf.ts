@@ -1,4 +1,4 @@
-import ShapeSize from "@/types/shape/size";
+import ShapeSize from "@/types/shape/Size";
 
 const shapeSize:ShapeSize = {
   min: 0,
