@@ -1,17 +1,20 @@
 "use client"
 
 import defaultField from "@/lib/conf/fields.conf";
-import Shape from "@/types/shape/shape";
+import Shape from "@/types/shape/Shape";
 import { useState } from "react";
 import SelectShapeModal from "./SelectShapeModal";
 import StartModal from "./StartModal";
 import countDownUseCase from "@/lib/usecase/countDownUseCase";
+import PlacedShape from "@/types/shape/PlacedShape";
+import fetchShapeUseCase from "@/lib/usecase/fetchShapeUseCase";
 
 export default function FieldModal({shapes}:{shapes:Shape[][]}) {
   const [selectedShape, setSelectedShape] = useState<Shape[]>([]);
   const [targetShapeIdx, setTargetShapeIdx] = useState<number>(0);
   const [isStart, setIsStart] = useState<boolean>(false);
   const [count, setCount] = useState<number>(3);
+  const [placedShape, setPlacedShape] = useState<PlacedShape|null>(null);
 
   const handleSelectShape = async (idx:number):Promise<void> => {
     setSelectedShape([...selectedShape, shapes[targetShapeIdx][idx]]);
@@ -20,7 +23,17 @@ export default function FieldModal({shapes}:{shapes:Shape[][]}) {
 
   const handleStartGame = async () =>{
     setIsStart(true);
-    await countDownUseCase({start:3,setCount});
+    const [, newShape] = await Promise.all([
+      countDownUseCase({start: 3, setCount}),
+      fetchShapeUseCase({shapes})
+    ]);
+    const newPlacedShape:PlacedShape={
+      shape:newShape,
+      color:`block${newShape.id+1}`,
+      current_x:8,
+      current_y:8,
+    }
+    setPlacedShape(newPlacedShape);
   }
 
   if (targetShapeIdx < 5){
@@ -36,6 +49,7 @@ export default function FieldModal({shapes}:{shapes:Shape[][]}) {
   if(count > 0){
     return <StartModal count={count} isStart={isStart} handleStartGame={handleStartGame} />
   }
+
 
   return (
     <>
