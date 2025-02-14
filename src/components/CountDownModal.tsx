@@ -1,13 +1,13 @@
 "use client"
 
-import ModalBackGround from "./cards/ModalBackGround";
+import ModalBackGroundCard from "./cards/ModalBackGroundCard";
 
 export default function CountDownModal({count}:{count:number}) {
   return (
-    <ModalBackGround>
+    <ModalBackGroundCard>
       <div className="bg-cell px-5 py-3 rounded-lg">
         <p className="text-lg">{count}</p>
       </div>
-    </ModalBackGround>
+    </ModalBackGroundCard>
   );
 }
