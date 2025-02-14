@@ -19,6 +19,9 @@ export default async function createShape({id}:{id:number}):Promise<Shape> {
     for(let j:number = 0; j < directionIdx.length; j++) {
       const direction:Direction = directions[directionIdx[j]];
       const newBlock:Block = {x:block.x + direction.x, y:block.y + direction.y};
+      if(newBlock.x < -2 || newBlock.x > 2 || newBlock.y < -2 || newBlock.y > 2) {
+        continue;
+      }
       const isUsed:boolean = shape.blocks.some((block:Block) => block.x === newBlock.x && block.y === newBlock.y);
       if(!isUsed){
         shape.blocks.push(newBlock);
