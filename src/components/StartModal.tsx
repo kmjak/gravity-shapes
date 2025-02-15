@@ -3,7 +3,7 @@
 import ModalBackGroundCard from "./cards/ModalBackGroundCard";
 import CountDownModal from "./CountDownModal";
 
-export default function StartModal({count,isStart,handleStartGame}:{count:number,isStart:boolean,handleStartGame:()=>void}) {
+export default function StartModal({count,isStart,handleStartGame}:{count:number,isStart:boolean,handleStartGame:()=>void}):React.ReactElement {
   if(!isStart){
     return (
       <ModalBackGroundCard>

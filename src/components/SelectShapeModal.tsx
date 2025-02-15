@@ -11,7 +11,7 @@ export default function SelectShapeModal({
   targetShapeIdx,
   shapes,
   handleSelectShape
-}:SelectShapeModalProps) {
+}:SelectShapeModalProps):React.ReactElement {
   return (
     <section>
       <div className="text-white text-center py-4">

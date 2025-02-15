@@ -9,7 +9,7 @@ import countDownUseCase from "@/lib/usecase/countDownUseCase";
 import PlacedShape from "@/types/shape/PlacedShape";
 import fetchShapeUseCase from "@/lib/usecase/fetchShapeUseCase";
 
-export default function FieldModal({shapes}:{shapes:Shape[][]}) {
+export default function FieldModal({shapes}:{shapes:Shape[][]}):React.ReactElement {
   const [selectedShape, setSelectedShape] = useState<Shape[]>([]);
   const [targetShapeIdx, setTargetShapeIdx] = useState<number>(0);
   const [isStart, setIsStart] = useState<boolean>(false);
@@ -21,7 +21,7 @@ export default function FieldModal({shapes}:{shapes:Shape[][]}) {
     setTargetShapeIdx(targetShapeIdx + 1);
   }
 
-  const handleStartGame = async () =>{
+  const handleStartGame = async ():Promise<void> =>{
     setIsStart(true);
     const [, newShape] = await Promise.all([
       countDownUseCase({start: 3, setCount}),
