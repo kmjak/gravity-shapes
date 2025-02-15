@@ -6,9 +6,9 @@ import { useState } from "react";
 import SelectShapeModal from "./SelectShapeModal";
 import StartModal from "./StartModal";
 import countDownUseCase from "@/lib/usecase/countDownUseCase";
-import PlacedShape from "@/types/shape/PlacedShape";
 import fetchShapeUseCase from "@/lib/usecase/fetchShapeUseCase";
 import { useShapeContext } from "@/context/shapeContext";
+import gameLogicUseCase from "@/lib/usecase/gameLogicUseCase";
 
 export default function FieldModal({candidateShapes}:{candidateShapes:Shape[][]}):React.ReactElement {
   const [targetShapeIdx, setTargetShapeIdx] = useState<number>(0);
@@ -18,8 +18,15 @@ export default function FieldModal({candidateShapes}:{candidateShapes:Shape[][]}
   const {
     shapes,
     placedShape,
+    current_x,
+    current_y,
+    color,
     setShapes,
     setPlacedShape,
+    setCurrent_x,
+    setCurrent_y,
+    setColor,
+    setSpeed,
   } = useShapeContext();
 
   const handleSelectShape = async (idx:number):Promise<void> => {
@@ -33,14 +40,12 @@ export default function FieldModal({candidateShapes}:{candidateShapes:Shape[][]}
       countDownUseCase({start: 3, setCount}),
       fetchShapeUseCase({candidateShapes})
     ]);
-    const newPlacedShape:PlacedShape={
-      shape:newShape,
-      color:`bg-block${newShape.id+1}`,
-      current_x:8,
-      current_y:2,
-      speed:300,
-    }
-    setPlacedShape(newPlacedShape);
+    setPlacedShape(newShape);
+    setColor(`block${newShape.id}`);
+    setCurrent_x(8);
+    setCurrent_y(2);
+    setSpeed(500);
+    await gameLogicUseCase({isGameOver:false});
   }
 
   if (targetShapeIdx < 5){
@@ -68,8 +73,8 @@ export default function FieldModal({candidateShapes}:{candidateShapes:Shape[][]}
               className={`w-6 h-6 border border-black ${
                 cell === -1
                 ? "bg-wall"
-                : (placedShape && placedShape.shape.blocks.some((block) => block.x+placedShape.current_x === x && block.y+placedShape.current_y === y))
-                ? placedShape.color
+                : (placedShape && placedShape.blocks.some((block) => block.x+current_x === x && block.y+current_y === y))
+                ? color
                 : "bg-cell"
               }`}
             />

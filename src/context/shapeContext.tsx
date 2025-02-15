@@ -1,22 +1,33 @@
 "use client"
 
 import ShapeContextValue from "@/types/context/ShapeContext";
-import PlacedShape from "@/types/shape/PlacedShape";
 import Shape from "@/types/shape/Shape";
-import { createContext, useContext, useState } from "react"
+import { createContext, useContext, useRef, useState } from "react"
 
 const ShapeContext = createContext<ShapeContextValue | null>(null);
 
 export function ShapeProvider({ children }: { children: React.ReactNode }):React.ReactElement {
   const [shapes, setShapes] = useState<Shape[]>([]);
-  const [placedShape, setPlacedShape] = useState<PlacedShape|null>(null);
+  const [placedShape, setPlacedShape] = useState<Shape|null>(null);
+  const [current_x, setCurrent_x] = useState<number>(8);
+  const [current_y, setCurrent_y] = useState<number>(2);
+  const color = useRef<string|null>(null);
+  const speed = useRef<number|null>(null);
   const contextValue: ShapeContextValue = {
     shapes,
     placedShape,
+    current_x,
+    current_y,
+    color: color.current,
+    speed: speed.current,
     setShapes,
     setPlacedShape,
+    setCurrent_x,
+    setCurrent_y,
+    setColor: (newColor:string) => { color.current = newColor },
+    setSpeed: (newSpeed:number) => { speed.current = newSpeed },
   };
-
+  
   return (
     <ShapeContext.Provider value={contextValue}>
       {children}
