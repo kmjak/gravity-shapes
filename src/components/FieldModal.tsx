@@ -31,7 +31,7 @@ export default function FieldModal({shapes}:{shapes:Shape[][]}) {
       shape:newShape,
       color:`block${newShape.id+1}`,
       current_x:8,
-      current_y:8,
+      current_y:4,
     }
     setPlacedShape(newPlacedShape);
   }
@@ -61,6 +61,8 @@ export default function FieldModal({shapes}:{shapes:Shape[][]}) {
               className={`w-6 h-6 border border-black ${
                 cell === -1
                 ? "bg-wall"
+                : (placedShape && placedShape.shape.blocks.some((block) => block.x+placedShape.current_x === x && block.y+placedShape.current_y === y))
+                ? placedShape.color
                 : "bg-cell"
               }`}
             />
