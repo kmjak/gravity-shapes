@@ -41,7 +41,7 @@ export default function FieldModal({candidateShapes}:{candidateShapes:Shape[][]}
       fetchShapeUseCase({candidateShapes})
     ]);
     setPlacedShape(newShape);
-    setColor(`block${newShape.id}`);
+    setColor(`bg-block${newShape.id}`);
     setCurrent_x(8);
     setCurrent_y(2);
     setSpeed(500);
