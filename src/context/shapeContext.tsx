@@ -7,7 +7,7 @@ import { createContext, useContext, useState } from "react"
 
 const ShapeContext = createContext<ShapeContextValue | null>(null);
 
-export function ShapeProvider({ children }: { children: React.ReactNode }) {
+export function ShapeProvider({ children }: { children: React.ReactNode }):React.ReactElement {
   const [shapes, setShapes] = useState<Shape[]>([]);
   const [placedShape, setPlacedShape] = useState<PlacedShape|null>(null);
   const contextValue: ShapeContextValue = {
@@ -23,7 +23,7 @@ export function ShapeProvider({ children }: { children: React.ReactNode }) {
     </ShapeContext.Provider>
   );
 }
-export function useShapeContext() {
+export function useShapeContext():ShapeContextValue {
   const context:ShapeContextValue|null = useContext(ShapeContext);
   if (!context) {
     throw new Error("useShapeContext must be used within a ShapeProvider");
