@@ -5,6 +5,7 @@ interface PlacedShape {
   color:string;
   current_x:number;
   current_y:number;
+  speed:number;
 }
 
 export default PlacedShape;

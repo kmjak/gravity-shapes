@@ -38,6 +38,7 @@ export default function FieldModal({candidateShapes}:{candidateShapes:Shape[][]}
       color:`bg-block${newShape.id+1}`,
       current_x:8,
       current_y:2,
+      speed:300,
     }
     setPlacedShape(newPlacedShape);
   }
