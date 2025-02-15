@@ -31,7 +31,7 @@ export default function FieldModal({shapes}:{shapes:Shape[][]}) {
       shape:newShape,
       color:`bg-block${newShape.id+1}`,
       current_x:8,
-      current_y:4,
+      current_y:2,
     }
     setPlacedShape(newPlacedShape);
   }
