@@ -8,18 +8,18 @@ export const metadata: Metadata = {
 };
 
 export default async function GamePage() {
-  const shapes: Shape[][] = [];
+  const candidateShapes: Shape[][] = [];
   for (let i: number = 0; i < 5; i++) {
-    shapes[i] = [];
+    candidateShapes[i] = [];
     for (let j: number = 0; j < 2; j++) {
       const shape: Shape = await createShape({ id: i });
-      shapes[i].push(shape);
+      candidateShapes[i].push(shape);
     }
   }
 
   return (
     <main className="flex flex-col items-center justify-center h-full">
-      <FieldModal shapes={shapes} />
+      <FieldModal candidateShapes={candidateShapes} />
     </main>
   );
 }

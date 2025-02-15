@@ -8,16 +8,22 @@ import StartModal from "./StartModal";
 import countDownUseCase from "@/lib/usecase/countDownUseCase";
 import PlacedShape from "@/types/shape/PlacedShape";
 import fetchShapeUseCase from "@/lib/usecase/fetchShapeUseCase";
+import { useShapeContext } from "@/context/shapeContext";
 
-export default function FieldModal({shapes}:{shapes:Shape[][]}):React.ReactElement {
-  const [selectedShape, setSelectedShape] = useState<Shape[]>([]);
+export default function FieldModal({candidateShapes}:{candidateShapes:Shape[][]}):React.ReactElement {
   const [targetShapeIdx, setTargetShapeIdx] = useState<number>(0);
   const [isStart, setIsStart] = useState<boolean>(false);
   const [count, setCount] = useState<number>(3);
-  const [placedShape, setPlacedShape] = useState<PlacedShape|null>(null);
+  
+  const {
+    shapes,
+    placedShape,
+    setShapes,
+    setPlacedShape,
+  } = useShapeContext();
 
   const handleSelectShape = async (idx:number):Promise<void> => {
-    setSelectedShape([...selectedShape, shapes[targetShapeIdx][idx]]);
+    setShapes([...shapes, candidateShapes[targetShapeIdx][idx]]);
     setTargetShapeIdx(targetShapeIdx + 1);
   }
 
@@ -25,7 +31,7 @@ export default function FieldModal({shapes}:{shapes:Shape[][]}):React.ReactEleme
     setIsStart(true);
     const [, newShape] = await Promise.all([
       countDownUseCase({start: 3, setCount}),
-      fetchShapeUseCase({shapes})
+      fetchShapeUseCase({candidateShapes})
     ]);
     const newPlacedShape:PlacedShape={
       shape:newShape,
@@ -40,7 +46,7 @@ export default function FieldModal({shapes}:{shapes:Shape[][]}):React.ReactEleme
     return (
       <SelectShapeModal
         targetShapeIdx={targetShapeIdx}
-        shapes={shapes}
+        candidateShapes={candidateShapes}
         handleSelectShape={handleSelectShape}
       />
     )

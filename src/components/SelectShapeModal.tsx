@@ -3,13 +3,13 @@ import Shape from "@/types/shape/Shape";
 
 interface SelectShapeModalProps {
   targetShapeIdx:number,
-  shapes:Shape[][],
+  candidateShapes:Shape[][],
   handleSelectShape:(idx:number) => void
 }
 
 export default function SelectShapeModal({
   targetShapeIdx,
-  shapes,
+  candidateShapes,
   handleSelectShape
 }:SelectShapeModalProps):React.ReactElement {
   return (
@@ -19,7 +19,7 @@ export default function SelectShapeModal({
         <p className="text-lg font-semibold">どちらのshapeを使用しますか？</p>
       </div>
       <div className="flex gap-5">
-        {shapes[targetShapeIdx].map((shape:Shape, idx:number) => (
+        {candidateShapes[targetShapeIdx].map((shape:Shape, idx:number) => (
           <div
             key={idx}
             className="flex flex-col border border-white cursor-pointer hover:border-green-600 transition-colors duration-300"
