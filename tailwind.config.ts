@@ -23,4 +23,13 @@ export default {
     },
   },
   plugins: [],
+  safelist: [
+    "bg-wall",
+    "bg-cell",
+    "bg-block1",
+    "bg-block2",
+    "bg-block3",
+    "bg-block4",
+    "bg-block5",
+  ],
 } satisfies Config;

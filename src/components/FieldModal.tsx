@@ -29,7 +29,7 @@ export default function FieldModal({shapes}:{shapes:Shape[][]}) {
     ]);
     const newPlacedShape:PlacedShape={
       shape:newShape,
-      color:`block${newShape.id+1}`,
+      color:`bg-block${newShape.id+1}`,
       current_x:8,
       current_y:4,
     }
