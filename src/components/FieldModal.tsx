@@ -14,17 +14,18 @@ export default function FieldModal({candidateShapes}:{candidateShapes:Shape[][]}
   const [targetShapeIdx, setTargetShapeIdx] = useState<number>(0);
   const [isStart, setIsStart] = useState<boolean>(false);
   const [count, setCount] = useState<number>(3);
-  
+
   const {
     shapes,
     placedShape,
-    current_x,
-    current_y,
+    currentX,
+    currentY,
     color,
+    speed,
     setShapes,
     setPlacedShape,
-    setCurrent_x,
-    setCurrent_y,
+    setCurrentX,
+    setCurrentY,
     setColor,
     setSpeed,
   } = useShapeContext();
@@ -42,10 +43,14 @@ export default function FieldModal({candidateShapes}:{candidateShapes:Shape[][]}
     ]);
     setPlacedShape(newShape);
     setColor(`bg-block${newShape.id}`);
-    setCurrent_x(8);
-    setCurrent_y(2);
+    setCurrentX(8);
+    setCurrentY(2);
     setSpeed(500);
-    await gameLogicUseCase({isGameOver:false});
+    await gameLogicUseCase({
+      isGameOver:false,
+      speed,
+      setCurrentY,
+    });
   }
 
   if (targetShapeIdx < 5){
@@ -73,7 +78,7 @@ export default function FieldModal({candidateShapes}:{candidateShapes:Shape[][]}
               className={`w-6 h-6 border border-black ${
                 cell === -1
                 ? "bg-wall"
-                : (placedShape && placedShape.blocks.some((block) => block.x+current_x === x && block.y+current_y === y))
+                : (placedShape && placedShape.blocks.some((block) => block.x+currentX === x && block.y+currentY === y))
                 ? color
                 : "bg-cell"
               }`}

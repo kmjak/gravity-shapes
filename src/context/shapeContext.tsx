@@ -2,22 +2,22 @@
 
 import ShapeContextValue from "@/types/context/ShapeContext";
 import Shape from "@/types/shape/Shape";
-import { createContext, useContext, useRef, useState } from "react"
+import { createContext, useContext, useMemo, useRef, useState } from "react"
 
 const ShapeContext = createContext<ShapeContextValue | null>(null);
 
 export function ShapeProvider({ children }: { children: React.ReactNode }):React.ReactElement {
   const [shapes, setShapes] = useState<Shape[]>([]);
   const [placedShape, setPlacedShape] = useState<Shape|null>(null);
-  const [current_x, setCurrentX] = useState<number>(8);
-  const [current_y, setCurrentY] = useState<number>(2);
+  const [currentX, setCurrentX] = useState<number>(8);
+  const [currentY, setCurrentY] = useState<number>(2);
   const color = useRef<string|null>(null);
-  const speed = useRef<number|null>(null);
-  const contextValue: ShapeContextValue = {
+  const speed = useRef<number>(500);
+  const contextValue: ShapeContextValue = useMemo(() => ({
     shapes,
     placedShape,
-    current_x,
-    current_y,
+    currentX,
+    currentY,
     color: color.current,
     speed: speed.current,
     setShapes,
@@ -26,7 +26,7 @@ export function ShapeProvider({ children }: { children: React.ReactNode }):React
     setCurrentY,
     setColor: (newColor:string) => { color.current = newColor },
     setSpeed: (newSpeed:number) => { speed.current = newSpeed },
-  };
+  }), [shapes, placedShape, currentX, currentY, color, speed]);
 
   return (
     <ShapeContext.Provider value={contextValue}>
