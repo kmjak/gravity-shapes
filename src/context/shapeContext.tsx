@@ -9,8 +9,8 @@ const ShapeContext = createContext<ShapeContextValue | null>(null);
 export function ShapeProvider({ children }: { children: React.ReactNode }):React.ReactElement {
   const [shapes, setShapes] = useState<Shape[]>([]);
   const [placedShape, setPlacedShape] = useState<Shape|null>(null);
-  const [current_x, setCurrent_x] = useState<number>(8);
-  const [current_y, setCurrent_y] = useState<number>(2);
+  const [current_x, setCurrentX] = useState<number>(8);
+  const [current_y, setCurrentY] = useState<number>(2);
   const color = useRef<string|null>(null);
   const speed = useRef<number|null>(null);
   const contextValue: ShapeContextValue = {
@@ -22,12 +22,12 @@ export function ShapeProvider({ children }: { children: React.ReactNode }):React
     speed: speed.current,
     setShapes,
     setPlacedShape,
-    setCurrent_x,
-    setCurrent_y,
+    setCurrentX,
+    setCurrentY,
     setColor: (newColor:string) => { color.current = newColor },
     setSpeed: (newSpeed:number) => { speed.current = newSpeed },
   };
-  
+
   return (
     <ShapeContext.Provider value={contextValue}>
       {children}
