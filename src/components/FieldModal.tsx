@@ -66,6 +66,8 @@ export default function FieldModal({candidateShapes}:{candidateShapes:Shape[][]}
   }
 
   return (
-    <FieldPreview />
+    <FieldPreview
+      isGameOver={isGameOver}
+    />
   )
 }
