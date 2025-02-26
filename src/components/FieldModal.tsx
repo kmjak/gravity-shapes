@@ -13,6 +13,7 @@ import gameLogicUseCase from "@/lib/usecase/gameLogicUseCase";
 export default function FieldModal({candidateShapes}:{candidateShapes:Shape[][]}):React.ReactElement {
   const [targetShapeIdx, setTargetShapeIdx] = useState<number>(0);
   const [isStart, setIsStart] = useState<boolean>(false);
+  const [isGameOver, setIsGameOver] = useState<boolean>(false);
   const [count, setCount] = useState<number>(3);
 
   const {
@@ -47,8 +48,9 @@ export default function FieldModal({candidateShapes}:{candidateShapes:Shape[][]}
     setCurrentY(2);
     setSpeed(500);
     await gameLogicUseCase({
-      isGameOver:false,
+      isGameOver,
       speed,
+      setIsGameOver,
       setCurrentY,
     });
   }
