@@ -1,6 +1,5 @@
 "use client"
 
-import defaultField from "@/lib/conf/fields.conf";
 import Shape from "@/types/shape/Shape";
 import { useState } from "react";
 import SelectShapeModal from "./SelectShapeModal";
@@ -9,6 +8,7 @@ import countDownUseCase from "@/lib/usecase/countDownUseCase";
 import fetchShapeUseCase from "@/lib/usecase/fetchShapeUseCase";
 import { useShapeContext } from "@/context/shapeContext";
 import gameLogicUseCase from "@/lib/usecase/gameLogicUseCase";
+import FieldPreview from "./FieldPreview";
 
 export default function FieldModal({candidateShapes}:{candidateShapes:Shape[][]}):React.ReactElement {
   const [targetShapeIdx, setTargetShapeIdx] = useState<number>(0);
@@ -18,10 +18,6 @@ export default function FieldModal({candidateShapes}:{candidateShapes:Shape[][]}
 
   const {
     shapes,
-    placedShape,
-    currentX,
-    currentY,
-    color,
     speed,
     setShapes,
     setPlacedShape,
@@ -69,25 +65,7 @@ export default function FieldModal({candidateShapes}:{candidateShapes:Shape[][]}
     return <StartModal count={count} isStart={isStart} handleStartGame={handleStartGame} />
   }
 
-
   return (
-    <>
-      {defaultField.map((row:number[], y:number) => (
-        <div key={y} className="flex">
-          {row.map((cell:number, x:number) => (
-            <div
-              key={x}
-              className={`w-6 h-6 border border-black ${
-                cell === -1
-                ? "bg-wall"
-                : (placedShape && placedShape.blocks.some((block) => block.x+currentX === x && block.y+currentY === y))
-                ? color
-                : "bg-cell"
-              }`}
-            />
-          ))}
-        </div>
-      ))}
-    </>
+    <FieldPreview />
   )
 }
