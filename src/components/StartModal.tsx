@@ -8,7 +8,7 @@ export default function StartModal({count,isStart,handleStartGame}:{count:number
     return (
       <ModalBackGroundCard>
         <div
-          className="bg-cell hover:bg-opacity-30 px-5 py-3 rounded-lg cursor-pointer shadow-md shadow-white hover:shadow-neutral-800 transition-all duration-200"
+          className="bg-cell hover:bg-opacity-30 px-5 py-3 rounded-lg cursor-pointer transition-all duration-200"
           onClick={handleStartGame}
         >
           <p
