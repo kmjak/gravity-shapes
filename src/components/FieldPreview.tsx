@@ -1,5 +1,5 @@
 import { useShapeContext } from "@/context/shapeContext";
-import defaultField from "@/lib/conf/fields.conf";
+import { defaultField } from "@/lib/conf/fields.conf";
 import handleKeyDown from "@/lib/usecase/keyDownUseCase";
 import { useEffect } from "react";
 

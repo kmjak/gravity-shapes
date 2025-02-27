@@ -26,4 +26,12 @@ const defaultField:number[][] = [
   [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, -1],
 ]
 
-export default defaultField;
+
+const fieldHeight:number = defaultField.length;
+const fieldWidth:number = defaultField[0].length;
+
+export {
+  defaultField,
+  fieldHeight,
+  fieldWidth
+};
