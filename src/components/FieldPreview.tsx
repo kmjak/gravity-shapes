@@ -1,7 +1,7 @@
 import { useShapeContext } from "@/context/shapeContext";
 import { defaultField } from "@/lib/conf/fields.conf";
 import handleKeyDown from "@/lib/usecase/keyDownUseCase";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 
 export default function FieldPreview({isGameOver}:{isGameOver:boolean}) {
   const {
@@ -13,13 +13,21 @@ export default function FieldPreview({isGameOver}:{isGameOver:boolean}) {
     setCurrentY,
   } = useShapeContext();
 
+  const keyDown = useCallback(
+    (event: KeyboardEvent) => {
+      if (!placedShape) return;
+      handleKeyDown({ event, shape: placedShape, currentX, currentY, setCurrentX, setCurrentY });
+    },
+    [placedShape, currentX, currentY, setCurrentX, setCurrentY]
+  );
+
   useEffect(() => {
-    if(isGameOver) return;
-    document.addEventListener("keydown", (event) => handleKeyDown({ event, setCurrentX, setCurrentY }));
+    if (isGameOver || !placedShape) return;
+    document.addEventListener("keydown", keyDown);
     return () => {
-      document.removeEventListener("keydown", (event) => handleKeyDown({ event, setCurrentX, setCurrentY }));
+      document.removeEventListener("keydown", keyDown);
     };
-  }, [handleKeyDown]);
+  }, [isGameOver, placedShape, keyDown]);
 
   return (
     <>
